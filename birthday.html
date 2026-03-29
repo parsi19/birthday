@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.container {
+  text-align: center;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  color: white;
+}
+
+input {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 200px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff1e4d;
+}
+
+.message {
+  margin-top: 20px;
+  display: none;
+  animation: pop 1s ease forwards;
+}
+
+@keyframes pop {
+  0% {transform: scale(0); opacity: 0;}
+  100% {transform: scale(1); opacity: 1;}
+}
+
+h2 {
+  font-size: 28px;
+  text-shadow: 0 0 10px white;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  width: 40px;
+  height: 50px;
+  background: red;
+  border-radius: 50%;
+  animation: floatUp 8s infinite ease-in;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 40px;
+  background: white;
+  left: 50%;
+  top: 50px;
+}
+
+@keyframes floatUp {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-110vh);}
+}
+
+.balloon:nth-child(1){left:10%; background:#ff4d6d; animation-duration:7s;}
+.balloon:nth-child(2){left:30%; background:#ffbe0b; animation-duration:9s;}
+.balloon:nth-child(3){left:50%; background:#3a86ff; animation-duration:6s;}
+.balloon:nth-child(4){left:70%; background:#8338ec; animation-duration:8s;}
+.balloon:nth-child(5){left:90%; background:#06d6a0; animation-duration:10s;}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: yellow;
+  top: -10px;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Type "hii" 🎁</h1>
+  <input type="text" id="inputText" placeholder="Enter here">
+  <br>
+  <button onclick="checkInput()">Unlock</button>
+
+  <div class="message" id="message">
+    <h2>🎉 Happy Birthday shrinjni🎂</h2>
+    <p>May your life be filled with success, happiness and unforgettable moments 💖</p>
+  </div>
+</div>
+
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+
+<script>
+function checkInput() {
+  const input = document.getElementById("inputText").value.toLowerCase().trim();
+  const msg = document.getElementById("message");
+
+  if (input === "hii") {
+    msg.style.display = "block";
+    createConfetti();
+  } else {
+    alert("Wrong input 😒 Try again");
+  }
+}
+
+function createConfetti() {
+  for (let i = 0; i < 50; i++) {
+    let conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    conf.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 4000);
+  }
+}
+</script>
+
+</body>
+</html>
